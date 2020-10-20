@@ -1,0 +1,29 @@
+#mainScene {
+    overflow: hidden;
+    position: relative;
+    /* width: auto; */
+    height: auto;
+    margin: 0 auto;
+    background-repeat: round;
+    /* background-image: url(../img/road.png); */
+
+}
+table {
+    margin: 0 auto;
+}
+
+#mainScene td {
+	border:solid 1px black;
+	text-align:center;
+	font-size:40px;
+	font-family:Times New Roman;
+	color: black;
+	width: 55px;
+	height: 55px;
+}
+
+#mainScene td:hover {
+	color: red;
+	cursor: pointer;
+}
+

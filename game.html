@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Пятнашки</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div id="mainScene">
+    
+</div>
+<button onclick="newgame()" id="newgame" style="padding: 0;width: 100%;">НОВАЯ ИГРА</button>
+
+
+<script src="js/pyatnashkiModel.js"></script>
+<script src="js/pyatnashkiView.js"></script>
+<script src="js/pyatnashkiController.js"></script>
+</body>
+</html>
+<script>
+    var parent = document.getElementById('mainScene');
+    function newgame()
+    {
+        pyatnashkiController.init();
+        //soundPlay(); // ИСПРАВИТЬ,АААААААААА
+    }
+
+    function soundPlay() {
+        if(document.getElementById('audio1')!=null) return;
+        var audio = new Audio();
+        audio.src = 'assets/sounds/game.mp3';
+        audio.id = "audio1";
+        //audio.controls = true;
+        audio.load();
+        audio.play();
+        audio.volume = 0.02;
+        audio.onended=function(){audio.play();};
+        parent.append(audio);
+    }
+</script>
