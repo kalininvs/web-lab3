@@ -8,24 +8,8 @@ const INITIAL_PYATNASHKI_XE = 0;
 const INITIAL_PYATNASHKI_YE = 0;
 const INITIAL_PYATNASHKI_X = 0;
 const INITIAL_PYATNASHKI_Y = 0;
-// const UP_BORDER=0;
-// const DOWN_BORDER=500;
-// const LEFT_BORDER = 0;
-// const RIGHT_BORDER = 650;
-// const KILLER_HEIGHT = 15;
-// const ENEMY_HEIGHT = 30;
-// const KEY_CODE_UP = 38;
-// const KEY_CODE_DOWN = 40;
-// const KEY_CODE_LEFT = 37;
-// const KEY_CODE_RIGHT = 39;
-// const PERSON_STEP = 50;
-// const PERSON_STEP_DOWN =20;
-// const ENEMY_STEP = 5;
-const ROAD=[60,320,600];
 var arr = [];
 var Scene = document.getElementById("mainScene");
-var PyatnashkiID = null;
-
 var Model = function () {
     this.objs = {
         'pyatnashkiEmpty': {

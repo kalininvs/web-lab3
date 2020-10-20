@@ -3,7 +3,6 @@
 Pyatnashki view
 
 */
-
 var View = function() {
     this.pyatnashki = document.getElementById('mainScene');
     this.onKeyDownEvent = null;
