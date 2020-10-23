@@ -15,22 +15,19 @@ Controller.prototype.init = function() {
 
     this.pyatnashkiView.init();
     this.pyatnashkiModel.init(this.needRendering.bind(this));
-    this.needRendering();
+    //this.needRendering();
 };
 
 Controller.prototype.moving = function(e,sound) {
-    this.start = true;
+    //this.start = true;
     var el = e.toElement;
-    var id = el.id;
     var inner = el.innerHTML;
     if(inner == "") { return;}
-    // this.pyatnashkiModel.objs.x = id[0];
-    // this.pyatnashkiModel.objs.y = id[2];
     this.pyatnashkiModel.pyatnashkiMove(e,this.pyatnashkiView.moveSound);
 };
 
 Controller.prototype.needRendering = function(){
-    if(!this.start)return;
+    //if(!this.start)return;
     this.pyatnashkiView.render(pyatnashkiModel.objs);
 };
 var pyatnashkiController = new Controller(pyatnashkiView, pyatnashkiModel);
