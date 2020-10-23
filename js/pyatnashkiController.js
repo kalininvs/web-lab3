@@ -4,32 +4,23 @@ Pyatnashki controller
 
 */
 
-var Controller = function (View, Model) {
-    this.pyatnashkiView = View;
-    this.pyatnashkiModel = Model;
-    var start = false;
+var Controller = function () {
+    this.pyatnashkiModel =new Model();
+    this.pyatnashkiView = new View(this.initRender.bind(this));
 };
 
-Controller.prototype.init = function() {
-    this.pyatnashkiView.onKeyDownEvent = this.moving.bind(this);
-
-    this.pyatnashkiView.init();
-    this.pyatnashkiModel.init(this.needRendering.bind(this));
-    //this.needRendering();
+Controller.prototype.reset = function() {
+    this.pyatnashkiModel.init();
+    this.pyatnashkiView.tableFill(this.pyatnashkiModel.arr,this.moving.bind(this));
 };
-
-Controller.prototype.moving = function(e,sound) {
-    //this.start = true;
+Controller.prototype.initRender = function() {
+    this.pyatnashkiView.init(this.pyatnashkiModel.arr,this.moving.bind(this));
+};
+Controller.prototype.moving = function(e) {
     var el = e.toElement;
     var inner = el.innerHTML;
     if(inner == "") { return;}
-    this.pyatnashkiModel.pyatnashkiMove(e,this.pyatnashkiView.moveSound);
+    this.pyatnashkiModel.pyatnashkiMove(e,this.pyatnashkiView);
+    this.pyatnashkiView.tableFill(this.pyatnashkiModel.arr,this.moving.bind(this));
 };
-
-Controller.prototype.needRendering = function(){
-    //if(!this.start)return;
-    this.pyatnashkiView.render(pyatnashkiModel.objs);
-};
-var pyatnashkiController = new Controller(pyatnashkiView, pyatnashkiModel);
-
-pyatnashkiController.init();
+var pyatnashkiController = new Controller();

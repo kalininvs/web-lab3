@@ -25,7 +25,7 @@
     var parent = document.getElementById('music');
     function newgame()
     {
-        pyatnashkiController.init();
+        pyatnashkiController.reset();
         soundPlay(); 
     }
 
@@ -34,7 +34,7 @@
         var audio = new Audio();
         audio.src = 'assets/sounds/game.mp3';
         audio.id = "audio1";
-        //audio.controls = true;
+        audio.controls = true;
         audio.load();
         audio.play();
         audio.volume = 0.02;
