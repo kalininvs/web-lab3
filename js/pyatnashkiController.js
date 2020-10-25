@@ -19,7 +19,7 @@ Controller.prototype.initRender = function() {
 Controller.prototype.moving = function(e) {
     var el = e.toElement;
     var inner = el.innerHTML;
-    if(inner == "") { return;}
+    // if(inner == "") { return;}
     this.pyatnashkiModel.pyatnashkiMove(e,this.pyatnashkiView);
     this.pyatnashkiView.tableFill(this.pyatnashkiModel.arr,this.moving.bind(this));
 };

@@ -73,8 +73,15 @@ Model.prototype.check = function(x,y,text) {
 
 
 Model.prototype.pyatnashkiMove = function(e){
+    console.log(e);
+    var mouse = {
+        x: e.pageX - canvasPosition.x,
+        y: e.pageY - canvasPosition.y
+    }
+    console.log("fff"+mouse);
     var el = e.toElement;
-    var id = el.id; //позиция в массиве
-    var text = el.innerHTML; //содержимое ячейки
-    this.check(id[0],id[2],Number(text));
+    var pos = el.id; //позиция в массиве
+    var posl = pos[0];
+    var pos2 = pos[2];
+    this.check(posl,pos2,Number(this.arr[posl][pos2]));
 }
