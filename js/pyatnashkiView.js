@@ -4,83 +4,95 @@ Pyatnashki view
 
 */
 var View = function(func1) {
-    document.addEventListener("DOMContentLoaded", function() {  func1();  } );
+	document.addEventListener("DOMContentLoaded", function() {  func1();  } );
+	//context = null;
+	cellsize = 0;
+	//movingX = 1;
+	//movingY = 1;
 };
 
-View.prototype.init = function (arr,onKeyDownEvent){
-    this.tableFill(arr,onKeyDownEvent);
+View.prototype.init = function (model,onKeyDownEvent){
+	this.tableFill(model,onKeyDownEvent);
 };
-View.prototype.tableFill = function(arr,onKeyDownEvent){
+View.prototype.numView = function (){
+	this.context.font = "bold "+ 
+	(this.cellsize/2) + "px Sans";
+	this.context.textAlign = "center";
+	this.context.textBaseline = "middle";
+	this.context.fillStyle = "#222";
+}
+View.prototype.cellView =  function(x, y,cellsize){
+	this.context.fillStyle = "#00FFFF";
+	this.context.fillRect(
+	x+1, 
+	y+1, 
+	this.cellsize-2, 
+	this.cellsize-2
+	);
+}
+View.prototype.getNullCell = function(arr){
+	for (var i = 0; i<4; i++){
+		for (var j=0; j<4; j++){
+			if(arr[i][j] === ""){
+				return {'x': i, 'y': j};
+			}
+		}
+	}
+}
+View.prototype.tableFill = function(model,onKeyDownEvent){
+	this.pos = model.pos;
 	var board = document.createElement("canvas");
 	board.id = "canvas";
-	board.width = 280;
-	board.height = 275;
+	board.width = 252;
+	board.height = 252;
+	this.cellsize = board.width / 4;
 	var ctx = board.getContext("2d");
-	
-	var posi = 0,posj=0;
-	var number = 0;
-	var image1 = new Image();
-    image1.src = 'assets/1.png';
-    image1.onload = function() {
-            ctx.drawImage(image1, 0, 0,60,60);
-         // 1 second (in milliseconds)
-    };
+	this.context = ctx;
+	var Empty = this.getNullCell(model.arr);
 	for(i = 0; i < 4; ++i){
 		
 		for(j = 0; j < 4; ++j){
-			ctx.beginPath();
-			ctx.fillStyle = "#00FFFF";
-			ctx.fillRect(posi,posj,60,60);
-			ctx.clearRect(posi+10,posj+10,40,40);
-			ctx.fill();
-			ctx.beginPath();
-			ctx.fillStyle = "#000"
-			ctx.font = "italic 15pt Arial";
-			ctx.fillText(number, posi+20,posj+35);
-			ctx.fill();
-			posi += 70;
-			number+=1;
-		}
-			posi = 0;
-	 		posj += 70;			
-    }
-    // var table = document.createElement("table"),
-    // tbody = document.createElement("tbody");
-    // table.id = "pyatnashki";				
-	// table.appendChild(tbody);
-	// for(i = 0; i < 4; ++i){
-	// 	var row = document.createElement("tr");
-	// 	for(j = 0; j < 4; ++j){
-	// 		var cell = document.createElement("td");
-	// 			cell.id = i + " " + j;
-	// 			cell.innerHTML = arr[i][j];
-	// 			row.appendChild(cell);
-	// 	}
-	// 	tbody.appendChild(row);					
-    // }
+			// if(model.pos.x == i & model.pos.y == j)
+			// {
+			// 	this.cellView(Empty.y*this.cellsize,Empty.x*this.cellsize,this.cellsize);
+			// 	this.context.beginPath();
+			// 	this.numView();
+				
+			// 	this.context.fillText(
+			// 		model.arr[i][j], 
+			// 		Empty.y * this.cellsize + this.cellsize / 2,
+			// 		Empty.x * this.cellsize + this.cellsize / 2
+			// 	);
+			// 	this.context.fill();
+			// 	continue;
+			// }
+			// if(Empty.x == i & Empty.y == j)
+			// {
+			// 	this.cellView(model.pos.y*this.cellsize,model.pos.x*this.cellsize,this.cellsize);
+			// 	this.context.beginPath();
+			// 	this.numView();
+			// 	this.context.fillText(
+			// 		model.arr[i][j], 
+			// 		model.pos.y * this.cellsize + this.cellsize / 2,
+			// 		model.pos.x * this.cellsize + this.cellsize / 2
+			// 	);
+			// 	this.context.fill();
+			// 	continue;
+			// }
+			this.cellView(j*this.cellsize,i*this.cellsize,this.cellsize);
+			this.context.beginPath();
+			this.numView();
+			
+			this.context.fillText(
+				model.arr[i][j], 
+				j * this.cellsize + this.cellsize / 2,
+				i * this.cellsize + this.cellsize / 2
+			);
+			this.context.fill();
+		}		
+	}
 	if(Scene.childNodes.length >= 1)
     Scene.removeChild(Scene.firstChild);	
-	// Scene.appendChild(table);
 	Scene.appendChild(board);	
     document.getElementById('canvas').addEventListener('click', onKeyDownEvent);
 }
-// View.prototype.tableFill = function(arr,onKeyDownEvent){
-//     var table = document.createElement("table"),
-//     tbody = document.createElement("tbody");
-//     table.id = "pyatnashki";				
-// 	table.appendChild(tbody);
-// 	for(i = 0; i < 4; ++i){
-// 		var row = document.createElement("tr");
-// 		for(j = 0; j < 4; ++j){
-// 			var cell = document.createElement("td");
-// 				cell.id = i + " " + j;
-// 				cell.innerHTML = arr[i][j];
-// 				row.appendChild(cell);
-// 		}
-// 		tbody.appendChild(row);					
-//     }
-// 	if(Scene.childNodes.length >= 1)
-//     Scene.removeChild(Scene.firstChild);	
-//     Scene.appendChild(table);	
-//     document.getElementById('pyatnashki').addEventListener('click', onKeyDownEvent);
-// }

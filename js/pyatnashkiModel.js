@@ -3,15 +3,14 @@
 Pyatnashki model
 
 */
-
-const INITIAL_PYATNASHKI_XE = 0;
-const INITIAL_PYATNASHKI_YE = 0;
-const INITIAL_PYATNASHKI_X = 0;
-const INITIAL_PYATNASHKI_Y = 0;
 var Scene = document.getElementById("mainScene");
 var Model = function () {
     this.arr = [];
     this.initTable();
+    this.pos = {
+        x : 100,
+        y : 100
+    };
 };
 Model.prototype.initTable =  function()
 {
@@ -45,43 +44,37 @@ Model.prototype.init = function(renderFunction){
 };
 
 Model.prototype.check = function(x,y,text) {
-    var position = x+y;
     var up,down,left,rigth;
-    var pos1 =  Number(position[0]);
-    var pos2 =  Number(position[1]);
-    up = Number(position[0]) - 1;
-    down = Number(position[0]) + 1;
-    left = Number(position[1]) - 1;
-    rigth = Number(position[1]) + 1;
+    var pos1 =  x;
+    var pos2 =  y;
+    up = x - 1;
+    down = x + 1;
+    left = y - 1;
+    rigth = y + 1;
     if(up>=0&up<=3)
     {
-        if(this.arr[up][pos2]=="") {this.arr[pos1][pos2] = "",this.arr[up][pos2] = text}
+        if(this.arr[up][pos2]=="") {this.arr[pos1][pos2] = "",this.arr[up][pos2] = text} //this.pos.x = up,this.pos.y = pos2}
     }
     if(down>=0&down<=3)
     {
-        if(this.arr[down][pos2]=="") {this.arr[pos1][pos2] = "",this.arr[down][pos2] = text}
+        if(this.arr[down][pos2]=="") {this.arr[pos1][pos2] = "",this.arr[down][pos2] = text}// this.pos.x = down,this.pos.y = pos2}
     }
     if(left>=0&left<=3)
     {
-        if(this.arr[pos1][left]=="") {this.arr[pos1][pos2] = "",this.arr[pos1][left] = text}
+        if(this.arr[pos1][left]=="") {this.arr[pos1][pos2] = "",this.arr[pos1][left] = text}// this.pos.x = pos1,this.pos.y = left}
     }
     if(rigth>=0&rigth<=3)
     {
-        if(this.arr[pos1][rigth]=="") {this.arr[pos1][pos2] = "",this.arr[pos1][rigth] = text}
+        if(this.arr[pos1][rigth]=="") {this.arr[pos1][pos2] = "",this.arr[pos1][rigth] = text}// this.pos.x = pos1,this.pos.y = rigth}
     }
 }
 
 
 Model.prototype.pyatnashkiMove = function(e){
-    console.log(e);
     var mouse = {
-        x: e.pageX - canvasPosition.x,
-        y: e.pageY - canvasPosition.y
+        x:  Math.trunc((e.clientX - Scene.offsetLeft) / 63),
+        y: Math.trunc((e.clientY - Scene.offsetLeft) / 63)
     }
-    console.log("fff"+mouse);
-    var el = e.toElement;
-    var pos = el.id; //позиция в массиве
-    var posl = pos[0];
-    var pos2 = pos[2];
-    this.check(posl,pos2,Number(this.arr[posl][pos2]));
+    console.log(mouse.y+" "+mouse.x);
+    this.check(mouse.y,mouse.x,Number(this.arr[mouse.y][mouse.x]));
 }
