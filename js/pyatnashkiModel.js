@@ -3,7 +3,6 @@
 Pyatnashki model
 
 */
-var Scene = document.getElementById("mainScene");
 var Model = function () {
     this.arr = [];
     this.initTable();
@@ -71,10 +70,5 @@ Model.prototype.check = function(x,y,text) {
 
 
 Model.prototype.pyatnashkiMove = function(e){
-    var mouse = {
-        x:  Math.trunc((e.clientX - Scene.offsetLeft) / 63),
-        y: Math.trunc((e.clientY - Scene.offsetLeft) / 63)
-    }
-    console.log(mouse.y+" "+mouse.x);
-    this.check(mouse.y,mouse.x,Number(this.arr[mouse.y][mouse.x]));
+    this.check(e.y,e.x,Number(this.arr[e.y][e.x]));
 }

@@ -3,6 +3,7 @@
 Pyatnashki view
 
 */
+var Scene = document.getElementById("mainScene");
 var View = function(func1) {
 	document.addEventListener("DOMContentLoaded", function() {  func1();  } );
 	//context = null;
@@ -93,6 +94,12 @@ View.prototype.tableFill = function(model,onKeyDownEvent){
 	}
 	if(Scene.childNodes.length >= 1)
     Scene.removeChild(Scene.firstChild);	
-	Scene.appendChild(board);	
-    document.getElementById('canvas').addEventListener('click', onKeyDownEvent);
+	Scene.appendChild(board);
+	//document.getElementById('canvas').addEventListener('click', onKeyDownEvent);
+	document.getElementById('canvas').addEventListener("click", function(e) {
+		var mouse = {
+			x:  Math.trunc((e.clientX - Scene.offsetLeft) / 63),
+			y: Math.trunc((e.clientY - Scene.offsetLeft) / 63)
+		}
+		onKeyDownEvent(mouse);  } );
 }
