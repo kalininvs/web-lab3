@@ -11,13 +11,27 @@ var Controller = function () {
 
 Controller.prototype.reset = function() {
     this.pyatnashkiModel.init();
-    this.pyatnashkiView.tableFill(this.pyatnashkiModel,this.moving.bind(this));
+    var anim = this.pyatnashkiView.getAnimation();
+    if(!anim)
+    {
+        this.pyatnashkiView.tableFill(this.pyatnashkiModel,this.moving.bind(this));
+    }
 };
 Controller.prototype.initRender = function() {
     this.pyatnashkiView.init(this.pyatnashkiModel,this.moving.bind(this));
 };
 Controller.prototype.moving = function(e) {
-    this.pyatnashkiModel.pyatnashkiMove(e,this.pyatnashkiView);
-    this.pyatnashkiView.tableFill(this.pyatnashkiModel,this.moving.bind(this));
+    
+    var anim = this.pyatnashkiView.getAnimation();
+    console.log(this.pyatnashkiModel);
+    console.log("anim= "+anim);
+    if(!anim)
+    {
+        this.pyatnashkiModel.pyatnashkiMove(e,this.pyatnashkiView);
+        if(Object.keys(this.pyatnashkiModel.pos).length == 0) { return;}
+        this.pyatnashkiView.animated(this.pyatnashkiModel,this.moving.bind(this));
+        //this.pyatnashkiView.tableFill(this.pyatnashkiModel,this.moving.bind(this));
+    }
+    
 };
 var pyatnashkiController = new Controller();

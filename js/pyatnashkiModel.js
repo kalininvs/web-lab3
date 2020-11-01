@@ -52,23 +52,24 @@ Model.prototype.check = function(x,y,text) {
     rigth = y + 1;
     if(up>=0&up<=3)
     {
-        if(this.arr[up][pos2]=="") {this.arr[pos1][pos2] = "",this.arr[up][pos2] = text} //this.pos.x = up,this.pos.y = pos2}
+        if(this.arr[up][pos2]=="") {this.arr[pos1][pos2] = "",this.arr[up][pos2] = text,this.pos.x = up,this.pos.y = pos2}
     }
     if(down>=0&down<=3)
     {
-        if(this.arr[down][pos2]=="") {this.arr[pos1][pos2] = "",this.arr[down][pos2] = text}// this.pos.x = down,this.pos.y = pos2}
+        if(this.arr[down][pos2]=="") {this.arr[pos1][pos2] = "",this.arr[down][pos2] = text,this.pos.x = down,this.pos.y = pos2}
     }
     if(left>=0&left<=3)
     {
-        if(this.arr[pos1][left]=="") {this.arr[pos1][pos2] = "",this.arr[pos1][left] = text}// this.pos.x = pos1,this.pos.y = left}
+        if(this.arr[pos1][left]=="") {this.arr[pos1][pos2] = "",this.arr[pos1][left] = text, this.pos.x = pos1,this.pos.y = left}
     }
     if(rigth>=0&rigth<=3)
     {
-        if(this.arr[pos1][rigth]=="") {this.arr[pos1][pos2] = "",this.arr[pos1][rigth] = text}// this.pos.x = pos1,this.pos.y = rigth}
+        if(this.arr[pos1][rigth]=="") {this.arr[pos1][pos2] = "",this.arr[pos1][rigth] = text, this.pos.x = pos1,this.pos.y = rigth}
     }
 }
 
 
 Model.prototype.pyatnashkiMove = function(e){
+    this.pos = {};
     this.check(e.y,e.x,Number(this.arr[e.y][e.x]));
 }
