@@ -23,22 +23,6 @@ View.prototype.getAnimation = function()
 {
 	return animation;
 }
-View.prototype.numView = function (){
-	this.context.font = "bold "+ 
-	(cellsize/2) + "px Sans";
-	this.context.textAlign = "center";
-	this.context.textBaseline = "middle";
-	this.context.fillStyle = "#222";
-}
-View.prototype.cellView =  function(x, y,cellsize){
-	this.context.fillStyle = "#00FFFF";
-	this.context.fillRect(
-	x+1, 
-	y+1, 
-	cellsize-2, 
-	cellsize-2
-	);
-}
 View.prototype.getNullCell = function(arr){
 	for (var i = 0; i<4; i++){
 		for (var j=0; j<4; j++){
@@ -55,7 +39,6 @@ View.prototype.animated = function(model) {
 	if(Object.keys(model.pos).length == 0) { return;}
 	this.setPosition(Empty,model.pos);
 	animTime = setInterval(function() {
-		
 		this.checkPosition(model,Empty,model.pos);
 	}.bind(this), 50);
 }
