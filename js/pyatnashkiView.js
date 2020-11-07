@@ -52,10 +52,11 @@ View.prototype.animated = function(model) {
 	animation = true;
 	var Empty = this.getNullCell(model.arr); 
 	if(Object.keys(model.pos).length == 0) { return;}
-	View.prototype.setPosition(Empty,model.pos);
+	this.setPosition(Empty,model.pos);
 	animTime = setInterval(function() {
-		View.prototype.checkPosition(model,Empty,model.pos);
-	  }, 50);
+		
+		this.checkPosition(model,Empty,model.pos);
+	}.bind(this), 50);
 
 }
 View.prototype.setPosition = function(empty,pos) {
@@ -75,7 +76,7 @@ View.prototype.checkPosition = function(model,empty,pos){
 			if(pos1.y0 < pos2.y0) { pos1.y += movingY; pos2.y -= movingY; }
 			if(pos1.y0 > pos2.y0) { pos1.y -= movingY; pos2.y += movingY;}
 		}
-		View.prototype.tableFill(model);
+		this.tableFill(model);
 }
 View.prototype.initTable = function(model,onKeyDownEvent){
 	canvas = document.createElement("canvas");
