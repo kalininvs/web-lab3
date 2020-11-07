@@ -120,17 +120,6 @@ View.prototype.setText = function(n,text, v) {
 	}
 	return n
 }
-View.prototype.cellAnimated2 = function(text,pos){
-	this.cellView(pos.x,pos.y,cellsize);
-	this.context.beginPath();
-	this.numView();
-	this.context.fillText(
-		text, 
-		pos.x + cellsize / 2,
-		pos.y + cellsize / 2
-	);
-	this.context.fill();
-}
 View.prototype.cellAnimated = function(text,pos){
 	svg.appendChild(this.getNode('rect', {id:pos.x+""+pos.y , x: pos.x+1, y:pos.y+1, width:cellsize-2, height:cellsize-2, fill:'#00FFFF' }));
 	svg.appendChild(this.setText('text',text, {x: (pos.x+ cellsize / 2)-5, y: (pos.y + cellsize / 2)+5, fill:'red' }));
@@ -150,15 +139,6 @@ View.prototype.tableFill = function(model){
 			}
 			svg.appendChild(this.getNode('rect', {id:i+""+j , x: j*cellsize+1, y:i*cellsize+1, width:cellsize-2, height:cellsize-2, fill:'#00FFFF' }));
 			svg.appendChild(this.setText('text',model.arr[i][j], {x: (j * cellsize + cellsize / 2)-5, y: (i * cellsize + cellsize / 2)+5, fill:'red' }));
-			// this.cellView(j*cellsize,i*cellsize,cellsize);
-			// this.context.beginPath();
-			// this.numView();
-			// this.context.fillText(
-			// 	model.arr[i][j], 
-			// 	j * cellsize + cellsize / 2,
-			// 	i * cellsize + cellsize / 2
-			// );
-			// this.context.fill();
 		}		
 	}
 	if(this.checkAnimation()) { return; }
